@@ -61,7 +61,7 @@
                     "run",
                     "-d",
                     "windows"
-                ],
+                ],//build\windows\x64\runner\Debug\timeline.exe
                 "problemMatcher": "$dart-build_runner",
                 "presentation": {
                     "echo": true,
