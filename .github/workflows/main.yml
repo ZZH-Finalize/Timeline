@@ -10,10 +10,16 @@ jobs:
     Deploy:
       runs-on: ubuntu-latest
       steps:
-        - name: Install Flutter
+        - name: Clone repository
+          uses: actions/checkout@v4
+
+        - name: Set up Flutter
           uses: subosito/flutter-action@v2
           with:
-            flutter-version: 'stable' # 或者指定具体版本，例如 '3.13.0'
+            channel: stable
+            flutter-version-file: pubspec.yaml # path to pubspec.yaml
+
+        - run: flutter --version
 
         - name: Deploy Flutter web app to Cloudflare Pages
           uses: senthilnasa/flutter-cloudflare-pages@v2
