@@ -35,16 +35,16 @@ jobs:
           uses: senthilnasa/flutter-cloudflare-pages@v2
           with:
             # Which web renderer to be used, default is auto
-            webRenderer: # optional, default is auto
+            # webRenderer: # optional, default is auto
 
             # The directory where the project is (default .)
-            workingDir: # optional, default is .
+            # workingDir: # optional, default is .
 
             # base href (if applicable)
-            baseHref: # optional, default is /
+            # baseHref: # optional, default is /
 
             # Custom args like: --dart-define="simple=example"
-            customArgs: # optional, default is 
+            # customArgs: # optional, default is 
 
             # The Cloudflare Project Name
             cfProjectName: Timeline
