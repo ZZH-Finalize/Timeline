@@ -17,36 +17,36 @@ class TimelineApp extends StatelessWidget {
   }
 }
 
-class Event extends StatelessWidget {
-  DateTime time;
-  String what;
+class EventBubble extends StatelessWidget {
+  final DateTime time;
+  final String what;
 
-  Event(this.time, this.what);
-  
+  const EventBubble(this.time, this.what, {super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(8.0),
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.blue[100],
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(color: Colors.blue, width: 2.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '时间: ${time.toString()}',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+    final color = Theme.of(context).colorScheme.primary;
+
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12.0),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(12.0),
+            // border: Border.all(color: Colors.blue, width: 2.0),
           ),
-          SizedBox(height: 8.0),
-          Text(
+          child: Text(
             '事件: $what',
-            style: TextStyle(fontSize: 14.0),
+            style: const TextStyle(fontSize: 14.0),
           ),
-        ],
-      ),
+        ),
+        Container(
+          width: 2,
+          height: 20,
+          color: color,
+        )
+      ],
     );
   }
 }
@@ -61,19 +61,20 @@ class Timeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme.secondary;
     return Center(
       child: GestureDetector(
         onDoubleTap: () {
           print('double click');
         },
         child: Container(
-          height: 120,
-          child: Event(DateTime.now(), 'assada'),
+          height: 10,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(10),
+            // border: Border.all(color: Colors.blue, width: 2.0),
+          ),
         ),
-        // child: Container(
-        //   color: Colors.blue[300],
-        //   height: 7,
-        // ),
       ),
     );
   }
