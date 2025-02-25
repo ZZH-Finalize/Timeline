@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:timelines/timelines.dart';
 
 void main() {
   runApp(const TimelineApp());
@@ -51,40 +54,42 @@ class EventBubble extends StatelessWidget {
   }
 }
 
-class Timeline extends StatelessWidget {
-  // final eventList = [
-  //   Event(DateTime.utc(0), '1'),
-  //   Event(DateTime.utc(3), '2'),
-  //   Event(DateTime.utc(7), '3'),
-  //   Event(DateTime.utc(27), '4'),
-  // ];
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.secondary;
-    return Center(
-      child: GestureDetector(
-        onDoubleTap: () {
-          print('double click');
-        },
-        child: Container(
-          height: 10,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(10),
-            // border: Border.all(color: Colors.blue, width: 2.0),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class TimelineMainPage extends StatelessWidget {
   const TimelineMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Timeline();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        var timelineComp = Timeline.tileBuilder(
+          scrollDirection: Axis.horizontal,
+          builder: TimelineTileBuilder.fromStyle(
+            itemExtent: constraints.maxWidth / 12,
+            contentsAlign: ContentsAlign.reverse,
+            itemCount: 12,
+            contentsBuilder: (context, index) {
+              return Text(
+                'event $index',
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+              );
+            },
+            indicatorStyle: IndicatorStyle.dot,
+            connectorStyle: ConnectorStyle.solidLine,
+          ),
+        );
+
+        return GestureDetector(
+          child: timelineComp,
+          onScaleUpdate: (details) {
+            print('scale $details');
+          },
+          onPanStart: (details) {
+            
+          },
+        );
+      },
+    );
   }
 }
